@@ -1,11 +1,11 @@
-POTS model simulation running withing browser
+POTTS model simulation running within browser
 =============================================
 
 General description
 -------------------
 
 - About 100 squares each running a simulation
-- Each simulation 5x5 or 10x10 grid
+- Each simulation: 5x5 or 10x10 grid
 
 Container class
 ---------------
