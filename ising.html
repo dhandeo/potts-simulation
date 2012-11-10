@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='en' lang='en'>
+<head>
+	<meta http-equiv='Content-Type' content='text/html;charset=utf-8' />
+	<title>2-D Ising Model Simulation | dtjohnson.net</title>
+	<style type='text/css'>
+		body {
+			font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+			font-size: 14px;
+			color: #222;
+		}
+
+		a {
+			text-decoration: none;
+			color: #546aa9;
+		}
+		a:hover {
+			text-decoration: underline;
+			color: #4868c3;
+		}
+		
+		h1 {
+			margin: 0;
+			padding: 0;
+			font-size: 22px;
+			color: #4d5467;
+			font-weight: bold;
+			padding-bottom: 3px;
+			margin-bottom: 0px;
+		}
+	</style>
+</head>
+
+<body>
+
+<h1>2-Dimensonal Ising Model Simulation</h1>
+by <a href='http://dtjohnson.net'>David T. Johnson</a>
+
+<div style='width: 920px'>
+<style type='text/css'>
+label.plot_toggle {
+	font-weight: bold;
+	margin-right: 10px;
+	white-space: nowrap;
+}
+div.control_button {
+	width: 30px;
+	height: 30px;
+	background-image: url("images/controls_sprite.png");
+	background-position: 0 0;
+	float: left;
+}
+div.slider_holder {
+	height: 30px;
+	background-image: url("images/slider_back.png");
+	background-repeat: repeat-x;
+	background-position: center;
+	float: left;
+	margin: 0px 9px;
+	position: relative;
+	width: 302px;
+}
+div.slider {
+	position: absolute;
+	margin-left: -9px;
+	left: 50%;
+	top: 6px;
+	background-image: url("images/slider_sprite.png");
+	width: 18px;
+	height: 18px;
+}
+div.slider_marker {
+	height: 22px; 
+	width: 2px;
+	background-color: #ccc;
+	position: absolute;
+	left: 50%;
+	margin-left: -1px;
+	top: 4px;
+}
+fieldset.options {
+	width: 320px;
+	float: left;
+	margin-left: 20px;
+	margin-bottom: 20px;
+	border: 1px solid #aaa;
+}
+fieldset.options>legend {
+	font-weight: bold;
+}
+fieldset.options>div {
+	margin-bottom: 10px;
+}
+fieldset.options>div:last-child {
+	margin-bottom: 0;
+}
+div.tooltip {
+	position: absolute;
+	top:10px;
+	left:10px;
+	background-color:white;
+	border: 1px solid #aaa;
+	padding: 5px 10px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	max-width: 250px;
+	visibility: hidden;
+}
+div.tooltip>div.pointer {
+	width: 30px;
+	height: 15px;
+	position: absolute;
+	top: -15px;
+	margin-left: -15px;
+	left: 0;
+	background-image: url("images/tooltip_top.png");
+}
+div#initial_superposition_box input {
+	width: 35px;
+}
+div#project_holder {
+	padding-bottom: 30px;
+}
+
+</style>
+
+<p>This is a simulation of the two-dimensional square lattice Ising model that I created for fun. The plot below (once you press start) has two frames. The large frame on the left is a 2-D grid of boxes that represent the individual spins of atoms. These spins are only allowed two values: up and down, signified by two different colors. The thin bar on the right shows the magnetization.</p>
+
+<p>Each spin is coupled to its four nearest neighbors. The tendency is for all of the spins to align the same way. In fact, the lowest energy configurations are when all of the spins are up or down. In statistical physics, however, the energy is not fixed but is Boltzmann distributed. Below the Curie temperature (marked on the temperature slider), this leads to domains with the same spin &ndash; a ferromagnet. At higher temperatures the fluctuations are too great for domains to form. There is a phase change at the Curie temperature. You can also apply an external magnetic field. The spins in the system tend to align themselves with the field. This has the effect of enlarging the domains matching the field until the whole system is aligned. This is the effect of induced magnetism found in all ferromagnets.</p>
+
+<p>The problem is solved with the Metropolis algorithm. A number of spins are chosen randomly as trials. The probabiliy that the spin will flip is given by the Boltzmann distribution and depends on the energy difference that would occur if flipped and the temperature. If the temperature is high, the probability of a flip is high, regardless of the energy difference. The simulation is done in Javascript using a web worker for the computation and HTML5 canvas for the display.</p>
+
+<p>I also created a <a href="http://www.youtube.com/watch?v=XtY5dLN5CGE" target="_blank" class="mimetype external">video</a> demonstrating some of the neat features in this model.</p>
+<br />
+
+<div id="project_holder">
+
+<canvas id="canvas" width="516" height="504" style='margin-top:10px;float:left;'></canvas>
+<fieldset class='options'>
+	<legend>Runtime Options</legend>
+	<div id='temperature_tooltip'>
+		Temperature:
+		<div class='slider_holder'>
+			<div class='slider_marker'></div>
+			<div class='slider' id='temperature'></div>
+		</div>
+		<div style='clear: left;'></div>
+	</div>
+	<div id='magnetic_field_tooltip'>
+		External Magnetic Field:
+		<div class='slider_holder'>
+			<div class='slider_marker'></div>
+			<div class='slider' id='Bfield'></div>
+		</div>
+		<div style='clear: left;'></div>
+	</div>
+	
+	<div id='color_palette_tooltip'>
+		Color Palette:
+		<select id="palette"></select>
+	</div>
+	
+	<div id='trials_per_frame_tooltip'>
+		Trials per Frame
+		<div class='slider_holder'>
+			<div class='slider' id='num_trials'></div>
+		</div>
+		<div style='clear: left;'></div>
+	</div>
+	
+	<div>
+		<label><input id='show_hints' type='checkbox' /> Show tooltip hints</label>
+	</div>
+</fieldset>
+<fieldset class='options'>
+	<legend>Initial Options</legend>
+	<div id='resolution_tooltip'>
+		Resolution:
+		<div class='slider_holder'>
+			<div class='slider' id='resolution'></div>
+		</div>
+		<div style='clear: left;'></div>
+	</div>
+	
+	<div id='initial_state_tooltip'>
+		Initial State:
+		<select id="initial_state">
+			<option value="warm">Warm (random)</option>
+			<option value="cold_up">Cold Up</option>
+			<option value="cold_down">Cold Down</option>
+			<option value="hot">Hot</option>
+		</select>
+	</div>
+	
+	<div style='text-align: center; padding-top:10px;'><input type='button' id='start_button' value='Start' style='padding:3px 6px; font-weight:bold;' /></div>
+</fieldset>
+
+<div style='clear: both; height:10px'></div>
+<div style='width: 516px;'>
+	<div class="control_button" id="control_play"></div>
+	<div class="control_button" id="control_pause" style='background-position: -30px 0; display:none;'></div>
+	<div class="control_button" id="control_slower" style='width: 44px; background-position: -90px 0;'></div>
+	<div class="control_button" id="control_faster" style='width: 44px; background-position: -134px 0;'></div>
+	<div id='speed' style='width:10px; height: 30px; line-height: 30px; float:left;'>1x</div>
+	<input type='button' id='step_button' value='Step' style='float:right;' />
+</div>
+<div style='clear: both; height:10px'></div>
+
+</div>
+
+</div>
+<script type='text/javascript' src='ising.js'></script>
+</body>
+</html>
