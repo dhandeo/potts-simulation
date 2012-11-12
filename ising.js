@@ -464,6 +464,7 @@ worker.onmessage = function(event) {
 var startButton = document.getElementById("start_button");
 addEvent(startButton, "click", init);
 
+
 showMessage("To begin, press the Start button\n on the right and then press play below.");
 
 })();
