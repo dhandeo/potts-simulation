@@ -15,6 +15,10 @@ function Simulation(width, height)
         {
         this.grid[i] = new Array(this.x);
         }
+    
+    // First color is background color and the rest are used
+    this.palette = ["#FFFFFF" , "#E768AD", "#6D87D6"];
+    
     };
     
 Simulation.prototype.Draw = function(ctx) 
@@ -25,13 +29,14 @@ Simulation.prototype.Draw = function(ctx)
         {
         for(var j = 0; j < this.y;  j++)  
             {
-            if (this.grid[i][j] === 0)
+            // Select the colors from the pallette
+            if (this.grid[i][j] >this.palette.length -1 )
                 {
-                ctx.fillStyle="#FF0000";
+                ctx.fillStyle =this.palette[0];
                 }
-            else
+             else
                 {
-                ctx.fillStyle="#FFFFFF";
+                ctx.fillStyle = this.palette[this.grid[i][j]]
                 }
             ctx.fillRect(i*size, j*size, size, size);
             }
@@ -40,26 +45,27 @@ Simulation.prototype.Draw = function(ctx)
     
 Simulation.prototype.Init = function() 
     {
-     // Defaults to random values between 0 and 1
-     // Can customize this
+     // Defaults to random values between 1 and 2
+     // Can inherit and customize this
+     
     for(var i = 0; i < this.x;  i++)
         {
         for(var j = 0; j < this.y;  j++)  
             {
-            this.grid[i][j] = Math.floor(Math.random()*2);
+            this.grid[i][j] = Math.floor(Math.random()*2) + 1;
             }
         }      
     };
 
 Simulation.prototype.Flip = function(i,j) 
     {
-    if (this.grid[i][j] === 0)
+    if (this.grid[i][j] === 1)
         {
-        this.grid[i][j] = 1;
+        this.grid[i][j] = 2;
         }
     else
         {
-        this.grid[i][j] =  0;
+        this.grid[i][j] =  1;
         }
     }
     

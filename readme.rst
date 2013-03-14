@@ -7,10 +7,13 @@ functioning`Here <http://dhandeo.github.com/potts-simulation/index.html>`_
 General description
 ===================
 
-The synaptic rearrangement simulation has the following parameters: 1. number of
-axons (2 to 25) 2. number of synaptic contacts per neuromuscular junction (NMJ)
-(2x2 up to 10x10) 3. number of NMJs per muscle (1 to 300) The simplest
-simulation is every synaptic contact is assigned an axon selected randomly.
+The synaptic rearrangement simulation has the following parameters:
+
+   1. number of axons (2 to 25)
+   2. number of synaptic contacts per neuromuscular junction (NMJ) (2x2 up to 10x10)
+   3. number of NMJs per muscle (1 to 300)
+
+The simplest simulation is every synaptic contact is assigned an axon selected randomly.
 With each time step, one synaptic contact is selected at random for loss. An
 axon that innervates an adjacent synaptic contact is selected at random to grow
 and take over the vacated synaptic contact. An interior contact has 8
