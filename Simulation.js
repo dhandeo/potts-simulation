@@ -38,6 +38,7 @@ Simulation.prototype.Draw = function(ctx)
                 {
                 ctx.fillStyle = this.palette[this.grid[i][j]]
                 }
+            //console.log(ctx.fillStyle);
             ctx.fillRect(i*size, j*size, size, size);
             }
         }
@@ -52,7 +53,8 @@ Simulation.prototype.Init = function()
         {
         for(var j = 0; j < this.y;  j++)  
             {
-            this.grid[i][j] = Math.floor(Math.random()*2) + 1;
+            this.grid[i][j] = Math.floor(Math.random()*this.no_axons) + 1;
+            console.log(this.grid[i][j])
             }
         }      
     };
