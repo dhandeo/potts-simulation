@@ -110,7 +110,7 @@ SynapticRearrangement.prototype.Animate = function()
     if(this.axons[newval] === this.x * this.y)
         {
         this.done = 1;
-        $(this.status).html("Done")            
+        $(this.status).html("Done");
         }    
     this.grid[xlocation][ylocation] = newval;
     this.DrawContact(xlocation, ylocation, newval);

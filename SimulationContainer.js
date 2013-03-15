@@ -5,7 +5,7 @@ function SimulationContainer()
     this.sims = [];
     }
     
-SimulationContainer.prototype.Animate = function() 
+SimulationContainer.prototype.Animate = function(timer) 
     {
     var done = 0;
     for (var i = 0; i < this.sims.length; i++) 
@@ -17,9 +17,12 @@ SimulationContainer.prototype.Animate = function()
             }
         if (done === this.sims.length)
             {
-            alert("All Done !")
+            alert("All Done !");
+            window.clearInterval(timer);
+            return 1;           
             }
         };
+        return 0;
     }
 
 SimulationContainer.prototype.Add = function(newsim) 
