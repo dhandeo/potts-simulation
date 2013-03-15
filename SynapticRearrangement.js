@@ -13,6 +13,7 @@ function SynapticRearrangement( width, height, no_axons)
     Simulation.call( this, width, height );
     this.no_axons = no_axons;
     this.palette = alphabet_palette;
+    this.done = 0;
     
     // Clockwise neighbor selection order starting from 3o clock, and y axis coming down     
     this.neighbor_order = [
@@ -72,6 +73,10 @@ SynapticRearrangement.prototype.DrawContact = function(x,y,axon)
         
 SynapticRearrangement.prototype.Animate = function() 
     {
+    if(this.done === 1)
+        {
+        return;
+        }
     // Find a pixel to withdraw
     // TODO: base the probability based on the fitness
     var xlocation = Math.floor(Math.random() * this.x);
@@ -104,6 +109,7 @@ SynapticRearrangement.prototype.Animate = function()
     this.axons[newval] ++;
     if(this.axons[newval] === this.x * this.y)
         {
+        this.done = 1;
         $(this.status).html("Done")            
         }    
     this.grid[xlocation][ylocation] = newval;

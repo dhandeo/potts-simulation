@@ -2,19 +2,16 @@
 
 function start() 
     {
-    var sims = [];
+    var container = new SimulationContainer();
+    
     // Add two simulations
-    // sims.push(new Simulation(10,10));
     for(var a = 0; a < 10; a ++)
         {
-        sims.push(new SynapticRearrangement(10,10, 2));
+        container.Add(new SynapticRearrangement(5, 5, 2));
         }
 
     window.setInterval(function() {
-            for (var i = 0; i < sims.length; i++) 
-                {
-                sims[i].Animate();
-                };
+            container.Animate();
             }, 0);
     }
 
