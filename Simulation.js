@@ -18,8 +18,9 @@ function Simulation(width, height, size)
     this.ctx =  canvas.getContext("2d");
     $(canvas).appendTo(div);
 
+    var simdiv = $("#simulations");
     $(div).css({"float": "left"});
-    $(div).appendTo('body');
+    $(div).appendTo(simdiv);
     
     // Defines a local grid of y rows and x columns
     this.x = width;

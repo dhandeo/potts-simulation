@@ -11,10 +11,9 @@ function SynapticRearrangement( width, height, no_axons, sim_no)
     {
     // Call super constructor.
     Simulation.call( this, width, height );
+    this.sim_no = sim_no ;
     this.no_axons = no_axons;
     this.palette = alphabet_palette;
-    this.done = 0;
-    $(this.status).html(sim_no.toString())
     
     // Clockwise neighbor selection order starting from 3o clock, and y axis coming down     
     this.neighbor_order = [
@@ -28,12 +27,6 @@ function SynapticRearrangement( width, height, no_axons, sim_no)
     [1,-1]    
     ];
     
-    // Create axons array to store axon specific statistics while simulation runs
-    this.axons = [];
-    for(var i = 0 ; i < this.no_axons+1; i ++)
-        {
-        this.axons.push(0);
-        }
 
     this.Init();
     this.Draw();
@@ -43,6 +36,16 @@ SynapticRearrangement.prototype.Init = function()
     {
      // Defaults to random values between 1 and 2
      // Can inherit and customize this
+
+    $(this.status).html(this.sim_no.toString())
+
+    // Create axons array to store axon specific statistics while simulation runs
+    this.axons = [];
+    for(var i = 0 ; i < this.no_axons+1; i ++)
+        {
+        this.axons.push(0);
+        }
+    this.done = 0;
      
     for(var i = 0; i < this.x;  i++)
         {

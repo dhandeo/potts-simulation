@@ -7,11 +7,15 @@ function start()
     var playing = 0;
     
     // Add two simulations
-    for(var a = 0; a < 50; a ++)
+    for(var a = 0; a < 100; a ++)
         {
-        container.Add(new SynapticRearrangement(5, 5, 3, a));
+        container.Add(new SynapticRearrangement(10, 10, 3, a));
         }
 
+    $( "#reset" ).button().click(function( event ) 
+        {
+        container.Reset();
+        });
 
     $( "#play" ).button().click(function( event ) 
         {
