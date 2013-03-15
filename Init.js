@@ -4,7 +4,7 @@ function start()
 
     var container = new SimulationContainer();
     var timer = null;
-    var playing = null;
+    var playing = 0;
     
     // Add two simulations
     for(var a = 0; a < 50; a ++)
@@ -12,29 +12,29 @@ function start()
         container.Add(new SynapticRearrangement(5, 5, 3));
         }
 
-    $( "#play" ).button();
-    $( "#play" ).click(function( event ) 
+
+    $( "#play" ).button().click(function( event ) 
         {
         if(playing === 1)
             {
-            clearInterval(timer);
-            $("#play").html("Play");
-            playing = 0;
+                    playing = 0;
+                    // $("#play").button('option', 'label', 'Play / ');
+                    window.clearInterval(timer);
             }
         else
             {
+            playing = 1;
             timer = window.setInterval(function() 
                 {
-                $("#play").html("Pause");
+                //$("#play").button('option', 'label', 'Play');
 
                 if(container.Animate() === 1)
                     {
                     playing = 0;
-                    $("#play").html("Play");
+                    // $("#play").button('option', 'label', 'Play');
                     window.clearInterval(timer);
                     }
                 }, 0);
-            playing = 1;
             }
         });
     }
