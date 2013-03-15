@@ -3,15 +3,25 @@
 function Simulation(width, height, size) 
     {
     this.size = size || 10;
-    // Create a div
-    canvas =document.createElement('canvas');    
-    $(canvas).appendTo('body');
-    
-    // Create a canvas
-    this.ctx =  canvas.getContext("2d");
-    
-    this.size =10;
 
+    // Create a div
+    div =document.createElement('div');
+
+    // Place holder for status text
+    this.status =document.createElement('div');
+    $(this.status).css({"float": "clear"});
+    $(this.status).html("Status")
+    $(this.status).appendTo(div)    
+
+    // Create canvas and rendering context
+    canvas =document.createElement('canvas');    
+    this.ctx =  canvas.getContext("2d");
+    $(canvas).appendTo(div);
+
+    $(div).css({"float": "left"});
+    $(div).appendTo('body');
+    
+    console.log(this.size)
     // Defines a local grid of y rows and x columns
     this.x = width;
     this.y = height;
