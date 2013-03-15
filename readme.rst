@@ -4,6 +4,8 @@ POTTS model simulation running within browser
 See the
 functioning`Here <http://dhandeo.github.com/potts-simulation/index.html>`_
 
+This simulation is still being developed.
+
 General description
 ===================
 
