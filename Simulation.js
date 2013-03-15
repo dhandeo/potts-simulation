@@ -21,7 +21,6 @@ function Simulation(width, height, size)
     $(div).css({"float": "left"});
     $(div).appendTo('body');
     
-    console.log(this.size)
     // Defines a local grid of y rows and x columns
     this.x = width;
     this.y = height;
@@ -42,7 +41,7 @@ function Simulation(width, height, size)
     // First color is background color and the rest are used
     this.palette = ["#FFFFFF" , "#E768AD", "#6D87D6"];
     
-    this.Init();
+    // this.Init();
     };
     
 Simulation.prototype.Draw = function() 

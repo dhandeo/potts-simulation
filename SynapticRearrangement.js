@@ -26,6 +26,13 @@ function SynapticRearrangement( width, height, no_axons)
     [1,1]    
     ];
     
+    // Create axons array to store axon specific statistics while simulation runs
+    this.axons = [];
+    for(var i = 0 ; i < this.no_axons+1; i ++)
+        {
+        this.axons.push(0);
+        }
+
     this.Init();
     this.Draw();
     };
@@ -39,11 +46,14 @@ SynapticRearrangement.prototype.Init = function()
         {
         for(var j = 0; j < this.y;  j++)  
             {
-            this.grid[i][j] = Math.floor(Math.random()*this.no_axons) + 1;
+            var newaxon =Math.floor(Math.random()*this.no_axons) + 1; 
+            this.grid[i][j] = newaxon;
+            this.axons[newaxon] ++;
             // this.grid[i][j] = 1;
             //console.log("Grid" + this.grid[i][j])
             }
         }      
+        console.log("axons: " + this.axons)
     };
 
 SynapticRearrangement.prototype.DrawContact = function(x,y,axon)
