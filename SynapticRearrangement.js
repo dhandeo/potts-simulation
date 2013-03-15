@@ -24,7 +24,7 @@ function SynapticRearrangement( width, height, no_axons)
     [-1,0],
     [-1,-1],
     [0,-1],
-    [1,1]    
+    [1,-1]    
     ];
     
     // Create axons array to store axon specific statistics while simulation runs
