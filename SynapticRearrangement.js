@@ -77,6 +77,8 @@ SynapticRearrangement.prototype.Animate = function()
     var xlocation = Math.floor(Math.random() * this.x);
     var ylocation = Math.floor(Math.random() * this.y);
 
+    this.axons[this.grid[xlocation][ylocation]] --;
+    
     var nlist = []     
     // Get the number of neighbors 
     for (var i = 0; i < this.neighbor_order.length; i++) 
@@ -98,7 +100,12 @@ SynapticRearrangement.prototype.Animate = function()
     // No select a neighbor to take its position
     var neighbor = Math.floor(Math.random() * nlist.length);
     var row = this.grid[nlist[neighbor][0]];
-    var newval = row[nlist[neighbor][1]]; 
+    var newval = row[nlist[neighbor][1]];
+    this.axons[newval] ++;
+    if(this.axons[newval] === this.x * this.y)
+        {
+        $(this.status).html("Done")            
+        }    
     this.grid[xlocation][ylocation] = newval;
     this.DrawContact(xlocation, ylocation, newval);
     }
