@@ -27,6 +27,7 @@ function SynapticRearrangement( width, height, no_axons)
     ];
     
     this.Init();
+    this.Draw();
     };
     
 SynapticRearrangement.prototype.Init = function() 
@@ -44,6 +45,20 @@ SynapticRearrangement.prototype.Init = function()
             }
         }      
     };
+
+SynapticRearrangement.prototype.DrawContact = function(x,y,axon)
+    {
+    if (axon >this.palette.length -1 )
+        {
+        this.ctx.fillStyle =this.palette[0];
+        }
+     else
+        {
+        this.ctx.fillStyle = this.palette[axon]
+        }
+    //console.log(ctx.fillStyle);
+    this.ctx.fillRect(x*this.size, y*this.size, this.size, this.size);
+    }
         
 SynapticRearrangement.prototype.Animate = function() 
     {
@@ -72,19 +87,8 @@ SynapticRearrangement.prototype.Animate = function()
      
     // No select a neighbor to take its position
     var neighbor = Math.floor(Math.random() * nlist.length);
-    try
-        {
-        var row = this.grid[nlist[neighbor][0]];
-        var newval = row[nlist[neighbor][1]]; 
-        this.grid[xlocation][ylocation] = newval;
-        }
-    catch(err)
-        {
-        console.log([xlocation, ylocation])
-        console.log(nlist[neighbor])
-        console.log(row)
-        debugger;
-        }
-
-    this.Draw(this.ctx, 50)
+    var row = this.grid[nlist[neighbor][0]];
+    var newval = row[nlist[neighbor][1]]; 
+    this.grid[xlocation][ylocation] = newval;
+    this.DrawContact(xlocation, ylocation, newval);
     }
