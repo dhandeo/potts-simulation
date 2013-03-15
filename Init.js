@@ -9,7 +9,7 @@ function start()
     // Add two simulations
     for(var a = 0; a < 50; a ++)
         {
-        container.Add(new SynapticRearrangement(5, 5, 3));
+        container.Add(new SynapticRearrangement(5, 5, 3, a));
         }
 
 

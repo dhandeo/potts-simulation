@@ -7,13 +7,14 @@
 SynapticRearrangement.prototype = new Simulation();
 SynapticRearrangement.constructor = SynapticRearrangement;
  
-function SynapticRearrangement( width, height, no_axons)
+function SynapticRearrangement( width, height, no_axons, sim_no)
     {
     // Call super constructor.
     Simulation.call( this, width, height );
     this.no_axons = no_axons;
     this.palette = alphabet_palette;
     this.done = 0;
+    $(this.status).html(sim_no.toString())
     
     // Clockwise neighbor selection order starting from 3o clock, and y axis coming down     
     this.neighbor_order = [

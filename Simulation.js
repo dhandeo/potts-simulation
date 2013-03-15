@@ -10,7 +10,7 @@ function Simulation(width, height, size)
     // Place holder for status text
     this.status =document.createElement('div');
     $(this.status).css({"float": "clear"});
-    $(this.status).html("Status")
+    //$(this.status).html("Status")
     $(this.status).appendTo(div)    
 
     // Create canvas and rendering context
