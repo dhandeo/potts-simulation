@@ -2,7 +2,7 @@
  * @author dhanannjay.deo
  */
 var alphabet_palette = [ "#FFFFFF", 
- "#381e24",
+ "#f81e24",
  "#2c2317",
  "#f2f08f",
  "#e0e67a",
