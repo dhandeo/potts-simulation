@@ -1,13 +1,17 @@
 
+
 function start() 
     {
-    var canvas = document.getElementById("canvas2d");
-    var ctx = canvas.getContext("2d");
-    sim = new SynapticRearrangement(10,10, 25);
-    sim.Init();
-    console.log(sim)
+    var sims = [];
+    // Add two simulations
+    sims.push(new Simulation(10,10));
+    sims.push(new SynapticRearrangement(10,10, 25));
+
     window.setInterval(function() {
-            sim.Animate(ctx);
+            for (var i = 0; i < sims.length; i++) 
+                {
+                sims[i].Animate();
+                };
             }, 0);
     }
 

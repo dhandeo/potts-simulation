@@ -1,10 +1,23 @@
 // Simulation class
 
-function Simulation(width, height) 
+function Simulation(width, height, size) 
     {
+    this.size = size || 10;
+    // Create a div
+    canvas =document.createElement('canvas');    
+    $(canvas).appendTo('body');
+    
+    // Create a canvas
+    this.ctx =  canvas.getContext("2d");
+    
+    this.size =10;
+
     // Defines a local grid of y rows and x columns
     this.x = width;
     this.y = height;
+    
+    this.ctx.canvas.width  = this.x * this.size * 1.2;
+    this.ctx.canvas.height = this.y * this.size * 1.2;
     
     // Variables defined for movement in animation
     this.flipx = 0;
@@ -19,11 +32,11 @@ function Simulation(width, height)
     // First color is background color and the rest are used
     this.palette = ["#FFFFFF" , "#E768AD", "#6D87D6"];
     
+    this.Init();
     };
     
-Simulation.prototype.Draw = function(ctx) 
+Simulation.prototype.Draw = function() 
     {
-    var size=10;
     // Draws the simulation
     for(var i = 0; i < this.x;  i++)
         {
@@ -32,14 +45,14 @@ Simulation.prototype.Draw = function(ctx)
             // Select the colors from the pallette
             if (this.grid[i][j] >this.palette.length -1 )
                 {
-                ctx.fillStyle =this.palette[0];
+                this.ctx.fillStyle =this.palette[0];
                 }
              else
                 {
-                ctx.fillStyle = this.palette[this.grid[i][j]]
+                this.ctx.fillStyle = this.palette[this.grid[i][j]]
                 }
             //console.log(ctx.fillStyle);
-            ctx.fillRect(i*size, j*size, size, size);
+            this.ctx.fillRect(i*this.size, j*this.size, this.size, this.size);
             }
         }
     };
@@ -53,8 +66,8 @@ Simulation.prototype.Init = function()
         {
         for(var j = 0; j < this.y;  j++)  
             {
-            this.grid[i][j] = Math.floor(Math.random()*this.no_axons) + 1;
-            console.log(this.grid[i][j])
+            this.grid[i][j] = Math.floor(Math.random()*2) + 1;
+            //console.log(this.grid[i][j])
             }
         }      
     };
@@ -91,7 +104,7 @@ Simulation.prototype.Animate = function(ctx)
     if(this.flipy >= this.y) this.flipy = 0;
     if(this.flipy < 0) this.flipy = this.y-1;
     
-    this.Draw(ctx);
+    this.Draw(ctx, 15);
     }      
     
     
