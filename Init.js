@@ -6,10 +6,10 @@ function start()
     var timer = null;
     var playing = 0;
     
-    // Add two simulations
+    // Add simulations
     for(var a = 0; a < 100; a ++)
         {
-        container.Add(new Target(10, 10, 3, a));
+        container.Add(new Target(15, 10, 3, a));
         }
 
     $( "#reset" ).button().click(function( event ) 

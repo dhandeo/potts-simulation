@@ -47,12 +47,12 @@ Target.prototype.Init = function()
         }
     this.done = 0;
      
-    for(var i = 0; i < this.x;  i++)
+    for(var j = 0; j < this.y;  j++)
         {
-        for(var j = 0; j < this.y;  j++)  
+        for(var i = 0; i < this.x;  i++)  
             {
             var newaxon =Math.floor(Math.random()*this.no_axons) + 1; 
-            this.grid[i][j] = newaxon;
+            this.grid[j][i] = newaxon;
             this.axons[newaxon] ++;
             // this.grid[i][j] = 1;
             //console.log("Grid" + this.grid[i][j])
@@ -86,7 +86,7 @@ Target.prototype.Animate = function()
     var xlocation = Math.floor(Math.random() * this.x);
     var ylocation = Math.floor(Math.random() * this.y);
 
-    this.axons[this.grid[xlocation][ylocation]] --;
+    this.axons[this.grid[ylocation][xlocation]] --;
     
     var nlist = []     
     // Get the number of neighbors 
@@ -96,7 +96,7 @@ Target.prototype.Animate = function()
         var ny = ylocation + this.neighbor_order[i][1];
         
         // TODO: Can compute the neighbors lookup table for performance
-        if ( (nx >= this.x-1) || (nx<0)  || (ny >= this.y-1) || (ny < 0))
+        if ( (nx > this.x-1) || (nx<0)  || (ny > this.y-1) || (ny < 0))
             {
                             
             }  
@@ -108,14 +108,14 @@ Target.prototype.Animate = function()
      
     // No select a neighbor to take its position
     var neighbor = Math.floor(Math.random() * nlist.length);
-    var row = this.grid[nlist[neighbor][0]];
-    var newval = row[nlist[neighbor][1]];
+    var row = this.grid[nlist[neighbor][1]];
+    var newval = row[nlist[neighbor][0]];
     this.axons[newval] ++;
     if(this.axons[newval] === this.x * this.y)
         {
         this.done = 1;
         $(this.status).html("Done");
         }    
-    this.grid[xlocation][ylocation] = newval;
+    this.grid[ylocation][xlocation] = newval;
     this.DrawContact(xlocation, ylocation, newval);
     }
