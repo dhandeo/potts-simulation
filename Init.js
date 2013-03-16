@@ -9,7 +9,7 @@ function start()
     // Add two simulations
     for(var a = 0; a < 100; a ++)
         {
-        container.Add(new SynapticRearrangement(10, 10, 3, a));
+        container.Add(new Target(10, 10, 3, a));
         }
 
     $( "#reset" ).button().click(function( event ) 

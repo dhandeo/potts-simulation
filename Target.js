@@ -4,10 +4,10 @@
 
 
 // Inherit from Simulation class 
-SynapticRearrangement.prototype = new Simulation();
-SynapticRearrangement.constructor = SynapticRearrangement;
+Target.prototype = new Simulation();
+Target.constructor = Target;
  
-function SynapticRearrangement( width, height, no_axons, sim_no)
+function Target( width, height, no_axons, sim_no)
     {
     // Call super constructor.
     Simulation.call( this, width, height );
@@ -15,7 +15,7 @@ function SynapticRearrangement( width, height, no_axons, sim_no)
     this.no_axons = no_axons;
     this.palette = alphabet_palette;
     
-    // Clockwise neighbor selection order starting from 3o clock, and y axis coming down     
+    // Clockwise neighbor selection order starting from 3 o'clock, and y axis coming down     
     this.neighbor_order = [
     [1,0],
     [1,1],
@@ -32,7 +32,7 @@ function SynapticRearrangement( width, height, no_axons, sim_no)
     this.Draw();
     };
     
-SynapticRearrangement.prototype.Init = function() 
+Target.prototype.Init = function() 
     {
      // Defaults to random values between 1 and 2
      // Can inherit and customize this
@@ -61,7 +61,7 @@ SynapticRearrangement.prototype.Init = function()
         console.log("axons: " + this.axons)
     };
 
-SynapticRearrangement.prototype.DrawContact = function(x,y,axon)
+Target.prototype.DrawContact = function(x,y,axon)
     {
     if (axon >this.palette.length -1 )
         {
@@ -75,7 +75,7 @@ SynapticRearrangement.prototype.DrawContact = function(x,y,axon)
     this.ctx.fillRect(x*this.size, y*this.size, this.size, this.size);
     }
         
-SynapticRearrangement.prototype.Animate = function() 
+Target.prototype.Animate = function() 
     {
     if(this.done === 1)
         {
