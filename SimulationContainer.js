@@ -27,10 +27,11 @@ SimulationContainer.prototype.Animate = function(timer)
 
 SimulationContainer.prototype.Reset = function(timer) 
     {
-    for (var i = 0; i < this.sims.length; i++) 
-        {
-        this.sims[i].Init();
-        };
+        this.sims = [];
+//    for (var i = 0; i < this.sims.length; i++) 
+//        {
+//        this.sims[i].Init();
+//        };
         return 0;
     }
 

@@ -37,7 +37,7 @@ Target.prototype.Init = function()
      // Defaults to random values between 1 and 2
      // Can inherit and customize this
 
-    $(this.status).html(this.sim_no.toString())
+    $(this.status).html((1+this.sim_no).toString())
 
     // Create axons array to store axon specific statistics while simulation runs
     this.axons = [];

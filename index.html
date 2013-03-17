@@ -9,25 +9,60 @@
 <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css"></link>
 
+</head>
+
+<body onload=start()>
+
+ <style type="text/css">
+    .fieldset-auto-width {
+         display: inline-block;
+    }
+ </style>
+
+ <div>
+  <fieldset class="fieldset-auto-width">
+	<legend>Initial Parameters</legend>
+
+  	<label for="ntargets">simulations:</label>
+  	<input type="text" id="ntargets" style="border: 0; color: #f6931f; font-weight: bold;" />
+  	<br>
+	<div id="targets"></div>
+
+	<br>
+  	<label for="ncontacts">target size (contacts per side):</label>
+  	<input type="text" id="ncontacts" style="border: 0; color: #f6931f; font-weight: bold;" />
+  	<br>
+	<div id="contacts"></div>
+
+	<br>
+  	<label for="naxons">axons:</label>
+  	<input type="text" id="naxons" style="border: 0; color: #f6931f; font-weight: bold;" />
+	<br>
+	<div id="axons"></div>
+  </fieldset>
+ </div>
+
+ <div>
+  <fieldset class="fieldset-auto-width">
+    <legend>Runtime Options</legend>
+ 
+	<div id="reset" style="float=left;float=clear; overflow=hidden">
+    	Initialize
+	</div>
+
+	<div id="play" style="float=left;">
+    	Play / Pause
+	</div>
+  </fieldset>
+ </div>
+
+ <div id="simulations"></div>     
+
 <script src="paletteAlphabet.js"></script>
 <script src="Simulation.js"></script>
 <script src="SimulationContainer.js"></script>
 <script src="Target.js"></script>
 <script src="Init.js"></script>
-
-</head>
-
-<body onload=start()>
-    
-<div id="play" style="float=left;">
-    Play / Pause
- </div>
- 
-<div id="reset" style="float=left;float=clear; oveflow=hidden">
-    Reset
- </div>
- <div id="simulations">
- </div>     
 
 </body>
 </html>
