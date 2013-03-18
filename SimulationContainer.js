@@ -30,6 +30,7 @@ SimulationContainer.prototype.Reset = function(timer)
     for (var i = 0; i < this.sims.length; i++) 
         {
         this.sims[i].Init();
+        this.sims[i].Draw();
         };
         return 0;
     }
