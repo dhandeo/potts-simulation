@@ -11,7 +11,7 @@ function start()
 
     $( "#contacts" ).slider({
       range: "min",
-      value: 10,
+      value: ncontacts,
       min: 2,
       max: 100,
       slide: function( event, ui ) {
@@ -19,10 +19,11 @@ function start()
       }
     });
     $( "#ncontacts" ).val( $( "#contacts" ).slider( "value" ) );
+    ncontacts = $( "#contacts" ).slider( "option", "value" );
 
     $( "#axons" ).slider({
       range: "min",
-      value: 5,
+      value: naxons,
       min: 2,
       max: 100,
       slide: function( event, ui ) {
@@ -30,18 +31,19 @@ function start()
       }
     });
     $( "#naxons" ).val( $( "#axons" ).slider( "value" ) );
+    naxons = $( "#axons" ).slider( "option", "value" );
 
     $( "#targets" ).slider({
       range: "min",
-      value: 100,
+      value: ntargets,
       min: 1,
       max: 1000,
       slide: function( event, ui ) {
         $( "#ntargets" ).val( ui.value );
       }
     });
-    
     $( "#ntargets" ).val( $( "#targets" ).slider( "value" ) );
+    ntargets = $( "#targets" ).slider( "option", "value");
 
     // Add simulations
     for(var a = 0; a < ntargets; a++)
@@ -57,10 +59,16 @@ function start()
 
         $( "#simulations" ).html("");
 
+        container.Initialize();
         for(var a = 0; a < ntargets; a++)
             {
             container.Add(new Target(ncontacts, ncontacts, naxons, a));
             }
+ //       container.Reset();
+        });
+
+    $( "#reset" ).button().click(function( event ) 
+        {
         container.Reset();
         });
 
