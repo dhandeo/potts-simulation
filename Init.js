@@ -45,12 +45,6 @@ function start()
     $( "#ntargets" ).val( $( "#targets" ).slider( "value" ) );
     ntargets = $( "#targets" ).slider( "option", "value");
 
-    // Add simulations
-    for(var a = 0; a < ntargets; a++)
-        {
-        container.Add(new Target(ncontacts, ncontacts, naxons, a));
-        }
-
     $( "#initialize" ).button().click(function( event ) 
         {
         var ncontacts = $( "#contacts" ).slider( "option", "value" );
