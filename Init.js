@@ -40,6 +40,7 @@ function start()
         $( "#ntargets" ).val( ui.value );
       }
     });
+    
     $( "#ntargets" ).val( $( "#targets" ).slider( "value" ) );
 
     // Add simulations
@@ -48,17 +49,19 @@ function start()
         container.Add(new Target(ncontacts, ncontacts, naxons, a));
         }
 
-    $( "#reset" ).button().click(function( event ) 
+    $( "#initialize" ).button().click(function( event ) 
         {
-        $( "#ncontacts" ).val( $( "#contacts" ).slider( "value" ) );
-        $( "#naxons" ).val( $( "#axons" ).slider( "value" ) );
-        $( "#ntargets" ).val( $( "#targets" ).slider( "value" ) );
+        var ncontacts = $( "#contacts" ).slider( "option", "value" );
+        var naxons = $( "#axons" ).slider( "option", "value" ) ;
+        var ntargets =  $( "#targets" ).slider( "option", "value" );
+
         $( "#simulations" ).html("");
-        container.Reset();
+
         for(var a = 0; a < ntargets; a++)
             {
             container.Add(new Target(ncontacts, ncontacts, naxons, a));
             }
+        container.Reset();
         });
 
     $( "#play" ).button().click(function( event ) 
