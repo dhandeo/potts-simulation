@@ -25,6 +25,11 @@ SimulationContainer.prototype.Animate = function(timer)
         return 0;
     }
 
+SimulationContainer.prototype.Initialize = function()
+    {
+    this.sims = [];
+    }
+
 SimulationContainer.prototype.Reset = function(timer) 
     {
     for (var i = 0; i < this.sims.length; i++) 

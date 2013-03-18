@@ -48,18 +48,18 @@ function Simulation(width, height, size)
 Simulation.prototype.Draw = function() 
     {
     // Draws the simulation
-    for(var i = 0; i < this.x;  i++)
+    for(var j = 0; j < this.y;  j++)
         {
-        for(var j = 0; j < this.y;  j++)  
+        for(var i = 0; i < this.x;  i++)  
             {
             // Select the colors from the pallette
-            if (this.grid[i][j] >this.palette.length -1 )
+            if (this.grid[j][i] >this.palette.length -1 )
                 {
                 this.ctx.fillStyle =this.palette[0];
                 }
              else
                 {
-                this.ctx.fillStyle = this.palette[this.grid[i][j]]
+                this.ctx.fillStyle = this.palette[this.grid[j][i]]
                 }
             //console.log(ctx.fillStyle);
             this.ctx.fillRect(i*this.size, j*this.size, this.size, this.size);
@@ -72,11 +72,11 @@ Simulation.prototype.Init = function()
      // Defaults to random values between 1 and 2
      // Can inherit and customize this
      
-    for(var i = 0; i < this.x;  i++)
+    for(var j = 0; j < this.y;  j++)
         {
-        for(var j = 0; j < this.y;  j++)  
+        for(var i = 0; i < this.x;  i++)  
             {
-            this.grid[i][j] = Math.floor(Math.random()*2) + 1;
+            this.grid[j][i] = Math.floor(Math.random()*2) + 1;
             //console.log(this.grid[i][j])
             }
         }      

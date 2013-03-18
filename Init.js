@@ -1,19 +1,66 @@
-
 function start() 
     {
 
     var container = new SimulationContainer();
     var timer = null;
     var playing = 0;
+
+    var ncontacts = 10;
+    var naxons = 5;
+    var ntargets = 100;
+
+    $( "#contacts" ).slider({
+      range: "min",
+      value: 10,
+      min: 2,
+      max: 100,
+      slide: function( event, ui ) {
+        $( "#ncontacts" ).val( ui.value );
+      }
+    });
+    $( "#ncontacts" ).val( $( "#contacts" ).slider( "value" ) );
+
+    $( "#axons" ).slider({
+      range: "min",
+      value: 5,
+      min: 2,
+      max: 100,
+      slide: function( event, ui ) {
+        $( "#naxons" ).val( ui.value );
+      }
+    });
+    $( "#naxons" ).val( $( "#axons" ).slider( "value" ) );
+
+    $( "#targets" ).slider({
+      range: "min",
+      value: 100,
+      min: 1,
+      max: 1000,
+      slide: function( event, ui ) {
+        $( "#ntargets" ).val( ui.value );
+      }
+    });
     
-    // Add two simulations
-    for(var a = 0; a < 100; a ++)
+    $( "#ntargets" ).val( $( "#targets" ).slider( "value" ) );
+
+    // Add simulations
+    for(var a = 0; a < ntargets; a++)
         {
-        container.Add(new SynapticRearrangement(10, 10, 3, a));
+        container.Add(new Target(ncontacts, ncontacts, naxons, a));
         }
 
-    $( "#reset" ).button().click(function( event ) 
+    $( "#initialize" ).button().click(function( event ) 
         {
+        var ncontacts = $( "#contacts" ).slider( "option", "value" );
+        var naxons = $( "#axons" ).slider( "option", "value" ) ;
+        var ntargets =  $( "#targets" ).slider( "option", "value" );
+
+        $( "#simulations" ).html("");
+
+        for(var a = 0; a < ntargets; a++)
+            {
+            container.Add(new Target(ncontacts, ncontacts, naxons, a));
+            }
         container.Reset();
         });
 
