@@ -59,17 +59,22 @@ function start()
 
         $( "#simulations" ).html("");
 
-        container.Initialize();
-        for(var a = 0; a < ntargets; a++)
-            {
-            container.Add(new Target(ncontacts, ncontacts, naxons, a));
-            }
- //       container.Reset();
+        container.Initialize(ncontacts, naxons, ntargets);
+        container.DrawPairingsBackground();
+
+       container.Reset();
         });
 
     $( "#reset" ).button().click(function( event ) 
         {
         container.Reset();
+        });
+        
+    $( "#compute-pairings" ).button().click(function( event ) 
+        {
+        container.DrawPairingsBackground();
+        container.ComputePairings();
+        container.PlotPairings();
         });
 
     $( "#play" ).button().click(function( event ) 

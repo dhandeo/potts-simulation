@@ -58,7 +58,7 @@ Target.prototype.Init = function()
             //console.log("Grid" + this.grid[i][j])
             }
         }      
-        console.log("axons: " + this.axons)
+        // console.log("axons: " + this.axons)
     };
 
 Target.prototype.DrawContact = function(x,y,axon)
