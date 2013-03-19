@@ -11,7 +11,7 @@ function Target( width, height, no_axons, sim_no)
     {
     // Call super constructor.
     Simulation.call( this, width, height );
-    this.sim_no = sim_no ;
+    this.sim_no = sim_no + 1 ;
     this.no_axons = no_axons;
     this.palette = alphabet_palette;
     
