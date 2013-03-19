@@ -33,19 +33,21 @@ SimulationContainer.prototype.Animate = function(timer)
     for (var i = 0; i < this.sims.length; i++) 
         {
         this.sims[i].Animate();
-        this.ComputePairings();
-        this.PlotPairings();
         if(this.sims[i].done === 1) 
             {
             done ++;
             }
         if (done === this.sims.length)
             {
-            alert("All Done !");
+            this.ComputePairings();
+            this.PlotPairings();
+//            alert("All Done !");
             window.clearInterval(timer);
             return 1;           
             }
         };
+        this.ComputePairings();
+        this.PlotPairings();
         return 0;
     }
 
@@ -135,6 +137,11 @@ SimulationContainer.prototype.PlotPairings = function ()
              this.ctx.fillStyle = "#" + rgbToHex(val, val, val );
             this.ctx.fillRect((i+1)*size*1.2, padding +  (j+1)*size*1.2, size, size);
             };
+            this.ctx.fillStyle = "#FFFFFF";
+            var y = this.naxons+2;
+            this.ctx.fillRect(y*size*1.2, padding + (i+1)*size*1.2, size, size);
+            this.ctx.fillStyle ="#000000";
+            this.ctx.fillText((this.pairs[i][i]).toString(), y*size*1.2, padding + (i+1.5)*size*1.2);
         }
     }
 
@@ -167,8 +174,6 @@ SimulationContainer.prototype.DrawPairingsBackground = function ()
         this.ctx.fillRect(i*size*1.2, padding + y*size*1.2, size, size);
         this.ctx.fillRect(y*size*1.2, padding + i*size*1.2, size, size);
         };
-    
-    
     }
     
 SimulationContainer.prototype.DrawPairingBarPlots = function ()

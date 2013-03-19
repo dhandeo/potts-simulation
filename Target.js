@@ -37,7 +37,7 @@ Target.prototype.Init = function()
      // Defaults to random values between 1 and 2
      // Can inherit and customize this
 
-    $(this.status).html((1+this.sim_no).toString())
+    $(this.status).html(this.sim_no+1).css("color","red")
 
     // Create axons array to store axon specific statistics while simulation runs
     this.axons = [];
@@ -106,7 +106,7 @@ Target.prototype.Animate = function()
             }
         }
      
-    // No select a neighbor to take its position
+    // Now select a neighbor to take its position
     var neighbor = Math.floor(Math.random() * nlist.length);
     var row = this.grid[nlist[neighbor][1]];
     var newval = row[nlist[neighbor][0]];
@@ -114,7 +114,7 @@ Target.prototype.Animate = function()
     if(this.axons[newval] === this.x * this.y)
         {
         this.done = 1;
-        $(this.status).html("Done");
+        $(this.status).html(newval).css("color","black");
         }    
     this.grid[ylocation][xlocation] = newval;
     this.DrawContact(xlocation, ylocation, newval);

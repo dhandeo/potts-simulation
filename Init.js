@@ -54,6 +54,7 @@ function start()
         $( "#simulations" ).html("");
 
         container.Initialize(ncontacts, naxons, ntargets);
+        container.ComputePairings();
         container.DrawPairingsBackground();
 
        container.Reset();
@@ -64,12 +65,12 @@ function start()
         container.Reset();
         });
         
-    $( "#compute-pairings" ).button().click(function( event ) 
-        {
-        container.DrawPairingsBackground();
-        container.ComputePairings();
-        container.PlotPairings();
-        });
+//    $( "#compute-pairings" ).button().click(function( event ) 
+//        {
+//        container.ComputePairings();
+//        container.DrawPairingsBackground();
+//        container.PlotPairings();
+//        });
 
     $( "#play" ).button().click(function( event ) 
         {
