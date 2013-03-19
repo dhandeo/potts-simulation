@@ -4,7 +4,6 @@ function start()
     var container = new SimulationContainer();
     var timer = null;
     var playing = 0;
-<<<<<<< HEAD
 
     var ncontacts = 10;
     var naxons = 5;
@@ -59,18 +58,6 @@ function start()
 
        container.Reset();
         });
-=======
-    var width = 10;
-    var height = 5;
-    var no_axons = 6;
-    var no_targets = 100;
-
-    // Add simulations
-    for(var a = 0; a < no_targets; a ++)
-        {
-        container.Add(new Target(width, height, no_axons, a));
-        }
->>>>>>> display axon numbers on sims and on pairings plot
 
     $( "#reset" ).button().click(function( event ) 
         {

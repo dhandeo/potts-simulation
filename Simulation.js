@@ -53,11 +53,7 @@ Simulation.prototype.Draw = function()
         for(var i = 0; i < this.x;  i++)  
             {
             // Select the colors from the pallette
-<<<<<<< HEAD
-            if (this.grid[j][i] >this.palette.length -1 )
-=======
             if (this.grid[j][i] > this.palette.length - 1 )
->>>>>>> display axon numbers on sims and on pairings plot
                 {
                 this.ctx.fillStyle = this.palette[0];
                 }
