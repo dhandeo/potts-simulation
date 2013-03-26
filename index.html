@@ -9,7 +9,32 @@
 <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css"></link>
 <script src="http://d3js.org/d3.v3.min.js"></script>
+<style type='text/css'>
 
+.chart {
+  margin-left: 42px;
+  font: 10px sans-serif;
+  shape-rendering: crispEdges;
+}
+
+.chart div {
+  background-color: steelblue;
+  text-align: right;
+  padding: 3px;
+  margin: 1px;
+  color: white;
+}
+
+.chart rect {
+  stroke: white;
+  fill: steelblue;
+}
+
+.chart text.bar {
+  fill: red;
+}
+
+</style>
 </head>
 
 <body onload=start()>

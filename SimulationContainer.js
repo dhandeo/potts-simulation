@@ -16,14 +16,33 @@ function SimulationContainer()
     // Create a div for plots 
     this.divPairings = $("#pairings");
     
+    
         // Create canvas and rendering context
     this.canvas =document.createElement('canvas')
     this.canvas.setAttribute("id", "pairingsCanvas")
-
     this.ctx =  this.canvas.getContext("2d");
     $(this.canvas).appendTo(this.divPairings);
+
+    // Create a div for bar plots 
+    this.foothold = document.createElement("div")
+    this.foothold.setAttribute("id", "foothold");
+    $(this.foothold).addClass("chart");
+    $(this.foothold).appendTo(this.divPairings);
+    // Create a svg canvas
+    this.chart1 = d3.select("#foothold"); //.append("svg")
+    
     // Create sims
     this.sims = [];
+    this.w = 100;
+    this.h = 100;
+    this.barPadding = 1;
+    
+    //Create SVG element
+    this.svg = d3.select("#foothold")
+                .append("svg")
+                .attr("width", this.w)
+                .attr("height", this.h);
+
 
     }
     
@@ -35,6 +54,7 @@ SimulationContainer.prototype.Animate = function(timer)
         this.sims[i].Animate();
         this.ComputePairings();
         this.PlotPairings();
+        this.UpdatePairingBarPlots();
         if(this.sims[i].done === 1) 
             {
             done ++;
@@ -171,26 +191,91 @@ SimulationContainer.prototype.DrawPairingsBackground = function ()
     
     }
     
+SimulationContainer.prototype.UpdatePairingBarPlots = function ()
+    {
+    var da = [];
+    var w = this.w;
+    var h = this.h;
+    var barPadding = this.barPadding;
+        
+    for(var i =0; i < this.pairs.length; i++)
+        {
+        da.push(this.pairs[i][i]);
+        }    
+
+        this.svg.selectAll("rect")
+           .data(da)
+           .attr("x", function(d, i) {
+                return i * (w / da.length);
+           })
+           .attr("y", function(d) {
+                return h - (d);
+           })
+           .attr("width", w / da.length - barPadding)
+           .attr("height", function(d) {
+                return d;
+           })
+           .attr("fill", "teal")
+           
+       this.svg.selectAll("text")
+            .data(da)
+        .attr("x", function(d, i) {
+                return i * (w / da.length);
+           })
+        .attr("y", function(d) { return h - d/100; })
+        .attr("dx", -3) // padding-right
+        .attr("dy", ".35em") // vertical-align: middle
+        .attr("text-anchor", "end") // text-align: right
+        .text(' ' + da);
+           
+    }
+    
 SimulationContainer.prototype.DrawPairingBarPlots = function ()
     {
     // Plots a graph for each axon, with pairings it performs 
-    var chart1 = d3.select(".content").append("svg")
-        .attr("class", "chart")
-        .attr("width", w * data.length - 1)
-        .attr("height", h);
+    var dataset = [];
     
-    chart1.selectAll("rect")
-        .data(data)
-      .enter().append("rect")
-        .attr("x", function(d, i) { return x(i) - .5; })
-        .attr("y", function(d) { return h - y(d.value) - .5; })
-        .attr("width", w)
-        .attr("height", function(d) { return y(d.value); });
-    
-    chart1.append("line")
-        .attr("x1", 0)
-        .attr("x2", w * data.length)
-        .attr("y1", h - .5)
-        .attr("y2", h - .5)
-        .style("stroke", "#000");
+    for(var i =0; i < this.pairs.length; i++)
+        {
+        dataset.push(this.pairs[i][i]);
+        }    
+
+        var w = this.w;
+        var h = this.h;
+        var barPadding = this.barPadding;
+            
+
+        this.svg.remove();
+        this.svg = d3.select("#foothold")
+            .append("svg")
+            .attr("width", this.w)
+            .attr("height", this.h);
+
+        this.svg.selectAll("rect")
+           .data(dataset)
+           .enter()
+           .append("rect")
+           .attr("x", function(d, i) {
+                return i * (w / dataset.length);
+           })
+           .attr("y", function(d) {
+                return h - (d * 4);
+           })
+           .attr("width", w / dataset.length - barPadding)
+           .attr("height", function(d) {
+                return 100 / d;
+           })
+           
+       this.svg.selectAll("text")
+            .data(dataset)
+          .enter().append("text")
+        .attr("x", function(d, i) {
+                return i * (w / dataset.length);
+           })
+        .attr("y", function(d) { return h - d/100; })
+        .attr("dx", -3) // padding-right
+        .attr("dy", ".35em") // vertical-align: middle
+        .attr("text-anchor", "end") // text-align: right
+        .text(String);
+           
     }

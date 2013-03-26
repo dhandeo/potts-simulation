@@ -5,9 +5,9 @@ function start()
     var timer = null;
     var playing = 0;
 
-    var ncontacts = 10;
-    var naxons = 5;
-    var ntargets = 100;
+    var ncontacts = 5;
+    var naxons = 3;
+    var ntargets = 40;
 
     $( "#contacts" ).slider({
       range: "min",
@@ -55,8 +55,9 @@ function start()
 
         container.Initialize(ncontacts, naxons, ntargets);
         container.DrawPairingsBackground();
-
        container.Reset();
+       container.ComputePairings();
+        container.DrawPairingBarPlots();
         });
 
     $( "#reset" ).button().click(function( event ) 
